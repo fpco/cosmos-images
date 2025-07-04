@@ -27,4 +27,4 @@ jobs:
         run: just build
       - name: Push image
         if: github.ref == 'refs/heads/main'
-        run: just push-image
+        run: just push-images
