@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  localosmosis:
+  images:
     runs-on: ubuntu-latest
     concurrency:
       group: cosmos-${{ github.ref }}

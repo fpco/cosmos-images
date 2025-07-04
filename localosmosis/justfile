@@ -1,5 +1,5 @@
 GIT_SHA := `git rev-parse HEAD`
-IMAGE_DOMAIN := "ghcr.io/fpco/cosmos-images"
+IMAGE_DOMAIN := "ghcr.io/fpco/cosmos-images/localosmosis"
 
 # List all recipies
 default:
