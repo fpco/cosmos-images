@@ -1,0 +1,13 @@
+diff --git a/optimize.sh b/optimize.sh
+index ac7497f..07b4f09 100755
+--- a/optimize.sh
++++ b/optimize.sh
+@@ -46,7 +46,7 @@ for WASM in /target/wasm32-unknown-unknown/release/*.wasm; do
+ 
+   OUT_FILENAME=$(basename "$WASM")
+   echo "Optimizing $OUT_FILENAME ..."
+-  wasm-opt -Os "$WASM" -o "artifacts/$OUT_FILENAME"
++  wasm-opt -Os --enable-bulk-memory "$WASM" -o "artifacts/$OUT_FILENAME"
+ done
+ 
+ echo "Post-processing artifacts..."
