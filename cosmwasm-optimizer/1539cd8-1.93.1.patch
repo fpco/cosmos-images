@@ -1,0 +1,28 @@
+diff --git a/Dockerfile b/Dockerfile
+index b78751a..f0acf5f 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,4 +1,4 @@
+-FROM rust:1.86.0-alpine AS targetarch
++FROM rust:1.93.1-alpine AS targetarch
+ 
+ ARG BUILDPLATFORM
+ ARG TARGETPLATFORM
+@@ -31,7 +31,7 @@ RUN apk update && apk add build-base cmake git python3 clang ninja
+ RUN tar -xf /tmp/binaryen.tar.gz
+ RUN cd binaryen-version_*/ \
+   && git clone --depth 1 https://github.com/google/googletest.git ./third_party/googletest \
+-  && cmake . -G Ninja -DCMAKE_CXX_FLAGS="-static" -DCMAKE_C_FLAGS="-static" -DCMAKE_BUILD_TYPE=Release -DBUILD_STATIC_LIB=ON \
++  && cmake . -G Ninja -DCMAKE_CXX_FLAGS="-static -Wno-error=maybe-uninitialized" -DCMAKE_C_FLAGS="-static" -DCMAKE_BUILD_TYPE=Release -DBUILD_STATIC_LIB=ON \
+   && ninja wasm-opt
+ 
+ # Run tests
+@@ -74,7 +74,7 @@ RUN cd bob_the_builder && \
+ #
+ # rust-optimizer target
+ #
+-FROM rust:1.86.0-alpine AS rust-optimizer
++FROM rust:1.93.1-alpine AS rust-optimizer
+ 
+ # Download the crates.io index using the new sparse protocol to improve performance
+ ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
