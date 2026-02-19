@@ -9,10 +9,13 @@ WORK_DIR=$(mktemp -d -p /tmp)
 
 git clone https://github.com/CosmWasm/optimizer "$WORK_DIR"
 
-patch_path="$(realpath 1539cd8-1.93.1.patch)"
+patch1_path="$(realpath 1539cd8-1.93.1.patch)"
+patch2_path="$(realpath 1539cd8-enable-bulk-memory.patch)"
+
 cd "$WORK_DIR"
 git checkout 1539cd865630d618df5246c35064078552194560 # v0.17.0
 
-git apply "${patch_path}"
+git apply "${patch1_path}"
+git apply "${patch2_path}"
 
 docker build -t "$IMAGE_NAME" .
